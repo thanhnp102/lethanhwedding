@@ -27,7 +27,7 @@
       rel="stylesheet"
     />
 
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
     <!-- ===== TOP CONTROLS ===== -->
@@ -330,8 +330,13 @@
                 >
               </div>
             </div>
-            <div class="venue-name" data-en="White Palace Restaurant">Nhà hàng White Palace</div>
-            <div class="venue-addr" data-en="245B Tran Thai Tong, Thai Binh Ward, Hung Yen">
+            <div class="venue-name" data-en="White Palace Restaurant">
+              Nhà hàng White Palace
+            </div>
+            <div
+              class="venue-addr"
+              data-en="245B Tran Thai Tong, Thai Binh Ward, Hung Yen"
+            >
               245B Trần Thái Tông, P. Thái Bình, Hưng Yên
             </div>
             <div class="card-actions">
@@ -440,8 +445,13 @@
                 >
               </div>
             </div>
-            <div class="venue-name" data-en="CTM Palace Wedding Center">Trung tâm tiệc cưới CTM Palace</div>
-            <div class="venue-addr" data-en="131 Nguyen Phong Sac, Nghia Tan Ward, Hanoi">
+            <div class="venue-name" data-en="CTM Palace Wedding Center">
+              Trung tâm tiệc cưới CTM Palace
+            </div>
+            <div
+              class="venue-addr"
+              data-en="131 Nguyen Phong Sac, Nghia Tan Ward, Hanoi"
+            >
               131 Nguyễn Phong Sắc, P. Nghĩa Tân, Hà Nội
             </div>
             <div class="card-actions">
@@ -534,7 +544,10 @@
       <div class="map-grid">
         <div class="reveal">
           <div class="map-name">White Palace</div>
-          <div class="map-addr" data-en="245B Tran Thai Tong, Thai Binh Ward, Hung Yen">
+          <div
+            class="map-addr"
+            data-en="245B Tran Thai Tong, Thai Binh Ward, Hung Yen"
+          >
             245B Trần Thái Tông, P. Thái Bình, Hưng Yên
           </div>
           <div class="map-wrap">
@@ -547,7 +560,12 @@
         </div>
         <div class="reveal">
           <div class="map-name">CTM Palace</div>
-          <div class="map-addr" data-en="131 Nguyen Phong Sac, Nghia Tan Ward, Hanoi">131 Nguyễn Phong Sắc, P. Nghĩa Tân, Hà Nội</div>
+          <div
+            class="map-addr"
+            data-en="131 Nguyen Phong Sac, Nghia Tan Ward, Hanoi"
+          >
+            131 Nguyễn Phong Sắc, P. Nghĩa Tân, Hà Nội
+          </div>
           <div class="map-wrap">
             <iframe
               title="Bản đồ CTM Palace"
@@ -596,10 +614,13 @@
             </div>
             <div>
               <label for="rWhich" data-en="Attending">Tham dự lễ</label>
-              <select id="rWhich" name="which">
-                <option data-en="Both ceremonies">Cả hai lễ</option>
-                <option data-en="Vu Quy (18.07)">Lễ Vu Quy (18.07)</option>
+              <select id="rWhich" name="which" required>
+                <option value="" disabled selected data-en="-- Select --">
+                  -- Chọn --
+                </option>
                 <option data-en="Wedding (19.07)">Lễ Thành Hôn (19.07)</option>
+                <option data-en="Vu Quy (18.07)">Lễ Vu Quy (18.07)</option>
+                <option data-en="Both ceremonies">Cả hai lễ</option>
                 <option data-en="Sadly cannot attend">
                   Rất tiếc không tham dự được
                 </option>
