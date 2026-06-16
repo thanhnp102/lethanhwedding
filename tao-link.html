@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tạo link thiệp mời theo tên khách</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Be+Vietnam+Pro:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--cream:#f6f1e8;--paper:#fffdf8;--ink:#3a3631;--muted:#6f675c;--gold:#c2a05a;--gold-d:#b08d4f;--field:#faf6ee;--line:rgba(58,54,49,.14)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:'Be Vietnam Pro',sans-serif;padding:clamp(20px,5vw,48px);line-height:1.6}
+.wrap{max-width:880px;margin:0 auto}
+h1{font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(1.8rem,5vw,2.6rem);margin:0 0 6px}
+.sub{color:var(--muted);font-size:.95rem;margin:0 0 28px}
+.card{background:var(--paper);border:1px solid var(--line);border-radius:12px;padding:clamp(18px,4vw,30px);margin-bottom:22px;box-shadow:0 30px 60px -50px rgba(58,54,49,.5)}
+label{display:block;font-size:.72rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-d);margin-bottom:8px}
+input,textarea{width:100%;padding:12px 14px;background:var(--field);border:1px solid rgba(58,54,49,.16);border-radius:8px;color:var(--ink);font-family:inherit;font-size:.95rem;outline:none;transition:border-color .2s,box-shadow .2s}
+input:focus,textarea:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(194,160,90,.16)}
+textarea{resize:vertical;min-height:150px;line-height:1.8}
+.hint{font-size:.82rem;color:var(--muted);margin-top:8px}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:16px}
+button{font-family:inherit;font-size:.85rem;font-weight:600;letter-spacing:.04em;padding:11px 20px;border-radius:8px;border:1px solid var(--gold);background:var(--gold);color:var(--paper);cursor:pointer;transition:all .2s}
+button:hover{background:var(--gold-d);border-color:var(--gold-d)}
+button.ghost{background:transparent;color:var(--gold-d)}
+button.ghost:hover{background:rgba(194,160,90,.1)}
+.count{font-size:.85rem;color:var(--muted);margin-left:auto}
+table{width:100%;border-collapse:collapse;margin-top:6px;font-size:.9rem}
+th,td{text-align:left;padding:11px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
+th{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold-d);font-weight:600}
+td.name{font-weight:500;white-space:nowrap}
+td.link{font-size:.8rem;color:var(--muted);word-break:break-all;font-family:ui-monospace,Menlo,monospace}
+td.act{white-space:nowrap;text-align:right}
+.mini{font-size:.74rem;padding:7px 12px;margin-left:6px}
+.zalo{border-color:#0068ff;background:#0068ff}
+.zalo:hover{background:#0055d6;border-color:#0055d6}
+.empty{color:var(--muted);text-align:center;padding:30px}
+.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);padding:12px 22px;border-radius:999px;font-size:.85rem;opacity:0;pointer-events:none;transition:all .3s}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.tablewrap{overflow-x:auto}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <h1>Tạo link thiệp mời theo tên khách</h1>
+  <p class="sub">Dán danh sách khách (mỗi dòng một tên), công cụ tự tạo link riêng cho từng người. Gửi link nào thì người đó thấy lời mời theo đúng tên.</p>
+
+  <div class="card">
+    <label for="base">Địa chỉ website (link gốc)</label>
+    <input id="base" value="https://lethanhwedding.online/" spellcheck="false">
+    <p class="hint">Sửa thành đúng tên miền của bạn. Khi chạy thử trên máy, có thể để là <code>index.html</code>.</p>
+
+    <label for="names" style="margin-top:22px">Danh sách khách — mỗi dòng một tên</label>
+    <textarea id="names" spellcheck="false" placeholder="anh Jeremy &amp; gia đình
+bạn Giang &amp; gia đình
+bạn Quảng &amp; Mai
+bạn Bê &amp; người thương"></textarea>
+    <label style="margin-top:18px"><input type="checkbox" id="enLang" style="width:auto;margin-right:8px;vertical-align:-1px" onchange="gen()">Tạo link tiếng Anh (?lang=en)</label>
+    <div class="row">
+      <button onclick="gen()">Tạo link</button>
+      <button class="ghost" onclick="loadSample()">Dùng ví dụ mẫu</button>
+      <span class="count" id="count"></span>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="row" style="margin-top:0;margin-bottom:8px">
+      <strong style="font-size:.95rem">Kết quả</strong>
+      <button class="ghost mini" style="margin-left:auto" onclick="copyAll()">Copy tất cả (dạng bảng)</button>
+    </div>
+    <div class="tablewrap">
+      <table id="out"><tbody><tr><td class="empty">Chưa có link. Nhập danh sách rồi bấm “Tạo link”.</td></tr></tbody></table>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Đã copy!</div>
+
+<script>
+function toast(msg){
+  var t=document.getElementById('toast'); t.textContent=msg||'Đã copy!';
+  t.classList.add('show'); clearTimeout(t._h); t._h=setTimeout(()=>t.classList.remove('show'),1600);
+}
+function copy(text,msg){
+  navigator.clipboard.writeText(text).then(()=>toast(msg)).catch(()=>{
+    var ta=document.createElement('textarea'); ta.value=text; document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');}catch(e){} ta.remove(); toast(msg);
+  });
+}
+function buildLink(base, name){
+  var b=base.trim(); if(!/[?#]/.test(b)){ /* ok */ }
+  var sep = b.indexOf('?')>=0 ? '&' : '?';
+  return b + sep + 'guest=' + encodeURIComponent(name);
+}
+function zaloShare(link){
+  return 'https://zalo.me/share/link?url=' + encodeURIComponent(link);
+}
+var current=[];
+function gen(){
+  var base=document.getElementById('base').value;
+  var en=document.getElementById('enLang').checked;
+  var lines=document.getElementById('names').value.split('\n').map(s=>s.trim()).filter(Boolean);
+  current = lines.map(function(name){
+    var link=buildLink(base,name);
+    if(en){ link += (link.indexOf('?')>=0?'&':'?') + 'lang=en'; }
+    return {name:name, link:link};
+  });
+  render();
+}
+function render(){
+  var tb=document.querySelector('#out tbody');
+  document.getElementById('count').textContent = current.length ? current.length+' khách' : '';
+  if(!current.length){ tb.innerHTML='<tr><td class="empty">Chưa có link.</td></tr>'; return; }
+  tb.innerHTML='';
+  current.forEach(function(g){
+    var tr=document.createElement('tr');
+    var td1=document.createElement('td'); td1.className='name'; td1.textContent=g.name;
+    var td2=document.createElement('td'); td2.className='link'; td2.textContent=g.link;
+    var td3=document.createElement('td'); td3.className='act';
+    var b1=document.createElement('button'); b1.className='ghost mini'; b1.textContent='Copy link';
+    b1.onclick=function(){ copy(g.link,'Đã copy link cho '+g.name); };
+    var b2=document.createElement('button'); b2.className='zalo mini'; b2.textContent='Zalo';
+    b2.onclick=function(){ window.open(zaloShare(g.link),'_blank'); };
+    td3.appendChild(b1); td3.appendChild(b2);
+    tr.appendChild(td1); tr.appendChild(td2); tr.appendChild(td3);
+    tb.appendChild(tr);
+  });
+}
+function copyAll(){
+  if(!current.length){ toast('Chưa có link'); return; }
+  var text=current.map(g=>g.name+'\t'+g.link).join('\n');
+  copy(text,'Đã copy cả bảng ('+current.length+' khách)');
+}
+function loadSample(){
+  document.getElementById('names').value='anh Jeremy & gia đình\nbạn Giang & gia đình\nbạn Quảng & Mai\nbạn Bê & người thương';
+  gen();
+}
+</script>
+</body>
+</html>
