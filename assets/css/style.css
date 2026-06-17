@@ -241,7 +241,7 @@
       }
       .hero .eyebrow {
         font-family: var(--sans);
-        font-size: 0.74rem;
+        font-size: 0.72rem;
         letter-spacing: 0.4em;
         text-transform: uppercase;
         color: var(--gold-l);
@@ -271,12 +271,15 @@
       .hero .ribbon .line {
         height: 1px;
         width: 46px;
-        background: rgba(233, 216, 176, 0.7);
+        background: var(--gold-l);
+        opacity: 0.85;
       }
       .hero .ribbon .txt {
         font-family: var(--serif);
-        letter-spacing: 0.18em;
-        font-size: 1.05rem;
+        font-style: italic;
+        letter-spacing: 0.06em;
+        font-size: 1.25rem;
+        color: var(--gold-l);
       }
       .scrolldown {
         position: absolute;
@@ -295,7 +298,7 @@
       .scrolldown .s1 {
         font-family: var(--sans);
         font-size: 0.62rem;
-        letter-spacing: 0.28em;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
       }
       .scrolldown .s2 {
@@ -313,6 +316,7 @@
       }
       .h2 {
         font-family: var(--serif);
+        font-style: italic;
         font-weight: 500;
         font-size: clamp(2rem, 6vw, 3.2rem);
         color: var(--ink);
@@ -358,15 +362,15 @@
       }
       .invite .signame {
         font-family: var(--script);
-        font-weight: 600;
+        font-weight: 700;
         font-size: 2rem;
         color: var(--ink);
       }
       .invite .sigjoin {
-        font-family: var(--script);
-        font-weight: 600;
+        font-family: var(--serif);
+        font-style: italic;
         font-size: 1.8rem;
-        color: var(--gold);
+        color: var(--gold-l);
         line-height: 1;
       }
 
@@ -378,6 +382,7 @@
       }
       .countdown h2 {
         font-family: var(--serif);
+        font-style: italic;
         font-weight: 500;
         font-size: clamp(2rem, 6vw, 3.2rem);
         color: var(--ink);
@@ -748,9 +753,9 @@
         gap: clamp(22px, 4vw, 36px);
       }
       .map-name {
-        font-family: var(--script);
-        font-weight: 700;
-        font-size: 1.7rem;
+        font-family: var(--sans);
+        font-weight: 500;
+        font-size: 1.1rem;
         color: var(--ink);
       }
       .map-addr {
@@ -1048,7 +1053,7 @@
       .gift-qrlabel {
         font-family: var(--sans);
         font-size: 0.62rem;
-        letter-spacing: 0.28em;
+        letter-spacing: 0.26em;
         text-transform: uppercase;
         color: var(--label);
       }
@@ -1084,7 +1089,9 @@
         line-height: 1.1;
       }
       footer .names span {
-        color: var(--gold);
+        font-family: var(--serif);
+        font-style: italic;
+        color: var(--gold-l);
       }
       .diamond {
         display: flex;
@@ -1124,4 +1131,159 @@
         font-size: 0.72rem;
         color: #b3a994;
         margin-top: 30px;
+      }
+
+      /* ===== MÀN BÌA MỞ THIỆP ===== */
+      .cover[hidden] {
+        display: none !important;
+      }
+      .cover {
+        position: fixed;
+        inset: 0;
+        z-index: 500;
+        display: grid;
+        place-items: center;
+        overflow: hidden;
+        text-align: center;
+        padding: 40px 24px;
+        transition: opacity 0.9s ease, visibility 0.9s ease;
+      }
+      .cover.closing {
+        opacity: 0;
+        visibility: hidden;
+      }
+      .cover-bg {
+        position: absolute;
+        inset: 0;
+        background: url("../img/hero.jpg") center/cover no-repeat;
+        object-position: 72% center;
+      }
+      .cover-overlay {
+        position: absolute;
+        inset: 0;
+        background: linear-gradient(
+          180deg,
+          rgba(46, 42, 38, 0.62),
+          rgba(46, 42, 38, 0.48) 45%,
+          rgba(46, 42, 38, 0.72)
+        );
+      }
+      .cover-inner {
+        position: relative;
+        z-index: 2;
+        color: var(--paper);
+        max-width: 600px;
+        animation: rise 1.1s 0.15s both;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(26px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      .cover-eyebrow {
+        font-family: var(--sans);
+        font-size: 0.72rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        color: var(--gold-l);
+        margin-bottom: 22px;
+      }
+      .cover-names {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .cover-name {
+        font-family: var(--script);
+        font-weight: 700;
+        font-size: clamp(2.6rem, 11vw, 4.4rem);
+        line-height: 1;
+        text-shadow: 0 2px 26px rgba(0, 0, 0, 0.4);
+      }
+      .cover-amp {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: clamp(1.6rem, 6vw, 2.4rem);
+        color: var(--gold-l);
+      }
+      .cover-date {
+        font-family: var(--sans);
+        font-size: 0.72rem;
+        letter-spacing: 0.4em;
+        text-transform: uppercase;
+        margin-top: 16px;
+        color: var(--gold-l);
+      }
+      .cover-divider {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin: 30px 0;
+      }
+      .cover-divider span {
+        height: 1px;
+        width: 44px;
+        background: rgba(233, 216, 176, 0.6);
+      }
+      .cover-divider .gem {
+        width: 7px;
+        height: 7px;
+        border: 1px solid var(--gold-l);
+        background: transparent;
+        transform: rotate(45deg);
+      }
+      .cover-invite {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--paper);
+        margin-bottom: 8px;
+      }
+      .cover-guest {
+        font-family: var(--script);
+        font-weight: 700;
+        font-size: clamp(1.9rem, 8vw, 3rem);
+        line-height: 1.15;
+        color: var(--gold-l);
+        text-shadow: 0 2px 20px rgba(0, 0, 0, 0.45);
+      }
+      .cover-sub {
+        font-family: var(--serif);
+        font-style: italic;
+        font-size: 1.1rem;
+        color: var(--paper);
+        margin-top: 10px;
+      }
+      .cover-btn {
+        margin-top: 34px;
+        padding: 14px 38px;
+        background: var(--gold);
+        color: var(--paper);
+        border: none;
+        border-radius: 999px;
+        font-family: var(--sans);
+        font-weight: 600;
+        font-size: 0.78rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        cursor: pointer;
+        box-shadow: 0 16px 36px -14px rgba(0, 0, 0, 0.5);
+        transition: background 0.3s, transform 0.2s;
+      }
+      .cover-btn:hover {
+        background: var(--gold-l);
+        color: var(--ink);
+        transform: translateY(-2px);
+      }
+      /* khoá cuộn nền khi màn bìa đang mở */
+      body.cover-open {
+        overflow: hidden;
       }

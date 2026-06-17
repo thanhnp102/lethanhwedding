@@ -30,6 +30,78 @@
     <link rel="stylesheet" href="assets/css/style.css" />
   </head>
   <body>
+    <!-- ===== MÀN BÌA MỞ THIỆP (chỉ hiện khi có ?guest=) ===== -->
+    <div id="cover" class="cover" hidden>
+      <div class="cover-bg"></div>
+      <div class="cover-overlay"></div>
+      <span
+        class="petal"
+        style="
+          left: 12%;
+          width: 9px;
+          height: 11px;
+          background: rgba(216, 193, 148, 0.6);
+          animation-duration: 15s;
+          animation-delay: -3s;
+        "
+      ></span>
+      <span
+        class="petal"
+        style="
+          left: 34%;
+          width: 7px;
+          height: 9px;
+          background: rgba(255, 253, 248, 0.5);
+          animation-duration: 19s;
+          animation-delay: -9s;
+        "
+      ></span>
+      <span
+        class="petal"
+        style="
+          left: 58%;
+          width: 10px;
+          height: 12px;
+          background: rgba(216, 193, 148, 0.5);
+          animation-duration: 17s;
+          animation-delay: -14s;
+        "
+      ></span>
+      <span
+        class="petal"
+        style="
+          left: 80%;
+          width: 8px;
+          height: 10px;
+          background: rgba(255, 253, 248, 0.45);
+          animation-duration: 21s;
+          animation-delay: -6s;
+        "
+      ></span>
+      <div class="cover-inner">
+        <div class="cover-eyebrow" data-en="Wedding invitation">Thiệp mời</div>
+        <div class="cover-names">
+          <span class="cover-name" data-en="Mai Le">Mai Lê</span>
+          <span class="cover-amp">&amp;</span>
+          <span class="cover-name" data-en="Phuc Thanh">Phúc Thành</span>
+        </div>
+        <div class="cover-date" data-en="Save the date · 18—19.07.2026">
+          Save the date · 18—19.07.2026
+        </div>
+        <div class="cover-divider">
+          <span></span><span class="gem"></span><span></span>
+        </div>
+        <div class="cover-invite" data-en="Cordially invite">Thân mời</div>
+        <div class="cover-guest" id="coverGuest"></div>
+        <div class="cover-sub" data-en="to share in our joy">
+          đến chung vui cùng gia đình
+        </div>
+        <button id="openCard" class="cover-btn" data-en="Open invitation">
+          Mở thiệp
+        </button>
+      </div>
+    </div>
+
     <!-- ===== TOP CONTROLS ===== -->
     <div class="topctrl">
       <button id="musicBtn" class="musicbtn" aria-label="Bật/tắt nhạc nền">
@@ -170,12 +242,12 @@
           Save the date · 18—19.07.2026
         </div>
         <div class="name" data-en="Mai Le">Mai Lê</div>
-        <div class="amp" data-en="and">và</div>
+        <div class="amp">&amp;</div>
         <div class="name" data-en="Phuc Thanh">Phúc Thành</div>
         <div class="ribbon">
           <span class="line"></span>
-          <span class="txt" data-en="WE'RE GETTING MARRIED"
-            >CHÚNG MÌNH SẮP CƯỚI</span
+          <span class="txt" data-en="We're getting married"
+            >Chúng mình sắp cưới</span
           >
           <span class="line"></span>
         </div>

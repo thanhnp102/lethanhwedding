@@ -223,17 +223,40 @@ const RSVP_ENDPOINT =
     e.stopPropagation();
     musicOn ? pause() : play();
   });
+  var autoEvents = ["touchstart", "scroll", "click", "keydown"];
   function autoOnce() {
     if (autoTried) return;
     autoTried = true;
     play();
-    ["touchstart", "scroll", "click", "keydown"].forEach((ev) =>
-      window.removeEventListener(ev, autoOnce),
+    autoEvents.forEach((ev) => window.removeEventListener(ev, autoOnce));
+  }
+  // chỉ bắt scroll/click để bật nhạc khi KHÔNG ở màn bìa
+  function enableAutoMusic() {
+    autoEvents.forEach((ev) =>
+      window.addEventListener(ev, autoOnce, { passive: true }),
     );
   }
-  ["touchstart", "scroll", "click", "keydown"].forEach((ev) =>
-    window.addEventListener(ev, autoOnce, { passive: true }),
-  );
+
+  /* ===== MÀN BÌA MỞ THIỆP (chỉ khi có tên khách) ===== */
+  var cover = document.getElementById("cover");
+  if (guest) {
+    // Có bìa: nhạc CHỈ bật khi bấm "Mở thiệp", không bắt scroll/click chỗ khác
+    document.getElementById("coverGuest").textContent = guest;
+    cover.hidden = false;
+    document.body.classList.add("cover-open");
+    document.getElementById("openCard").addEventListener("click", function () {
+      play(); // click hợp lệ -> nhạc chạy chắc chắn
+      autoTried = true;
+      cover.classList.add("closing");
+      document.body.classList.remove("cover-open");
+      setTimeout(function () {
+        cover.hidden = true;
+      }, 950);
+    });
+  } else {
+    // Không có bìa: bật nhạc khi khách scroll/click lần đầu
+    enableAutoMusic();
+  }
 
   /* GIFT box — lật 3D, click để mở/đóng */
   const giftWrap = document.querySelector(".gift-card-wrap");
