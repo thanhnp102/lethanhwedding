@@ -202,8 +202,9 @@ const RSVP_ENDPOINT =
     autoTried = false;
   audio.volume = 0.45;
   function setIcon() {
-    icon.textContent = musicOn ? "❚❚" : "♪";
-    icon.style.fontSize = musicOn ? "1rem" : ".78rem";
+    icon.src = musicOn
+      ? "assets/img/music.png"
+      : "assets/img/music-off.png";
   }
   function play() {
     audio

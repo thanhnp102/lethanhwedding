@@ -124,6 +124,15 @@
         color: var(--paper);
         border-color: var(--gold);
       }
+      .music-ic {
+        width: 19px;
+        height: 19px;
+        object-fit: contain;
+        transition: filter 0.3s;
+      }
+      .musicbtn:hover .music-ic {
+        filter: brightness(0) invert(1);
+      }
       .flag {
         display: inline-flex;
         width: 24px;
