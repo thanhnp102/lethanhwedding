@@ -118,20 +118,22 @@
         transition: all 0.3s;
         padding: 0;
       }
-      .musicbtn:hover,
-      .langbtn:hover {
-        background: var(--gold);
-        color: var(--paper);
-        border-color: var(--gold);
+      @media (hover: hover) {
+        .musicbtn:hover,
+        .langbtn:hover {
+          background: var(--gold);
+          color: var(--paper);
+          border-color: var(--gold);
+        }
+        .musicbtn:hover .music-ic {
+          filter: brightness(0) invert(1);
+        }
       }
       .music-ic {
         width: 19px;
         height: 19px;
         object-fit: contain;
         transition: filter 0.3s;
-      }
-      .musicbtn:hover .music-ic {
-        filter: brightness(0) invert(1);
       }
       .flag {
         display: inline-flex;
@@ -1227,7 +1229,7 @@
         font-size: 0.72rem;
         letter-spacing: 0.4em;
         text-transform: uppercase;
-        margin-top: 16px;
+        margin-bottom: 26px;
         color: var(--gold-l);
       }
       .cover-divider {
